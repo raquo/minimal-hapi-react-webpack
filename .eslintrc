@@ -1,0 +1,27 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    // All eslint rules: http://eslint.org/docs/rules/
+    "strict": [1, "global"],
+    "no-use-before-define": 1,
+    "jsx-quotes": [1, "prefer-single"],
+
+    // React plugin rules: https://github.com/yannickcr/eslint-plugin-react
+    "react/jsx-no-undef": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 1,
+    "react/no-unknown-property": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/self-closing-comp": 1
+  }
+}

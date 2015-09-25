@@ -1,0 +1,27 @@
+.Counter {
+    max-width: 400px;
+}
+
+.Counter .-number {
+    display: inline-block;
+    min-width: 1.5em;
+    font-size: 80px;
+    color: #0040b0;
+}
+
+.Counter .-button {
+    position: relative;
+    top: -12px;
+    margin-left: 30px;
+    font-size: 40px;
+    background: white;
+    border: 3px solid #0040b0;
+    border-radius: 10px;
+    width: 2em;
+    cursor: pointer;
+    line-height: 1.7em;
+}
+
+.Counter .-button:active {
+    background: #66aaff;
+}
