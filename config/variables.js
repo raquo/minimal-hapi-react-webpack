@@ -2,10 +2,12 @@
 
 var deepExtend = require('deep-extend');
 var path = require('path');
+var chalk = require('chalk');
 
 var NODE_ENV = process.env.NODE_ENV;
 var ROOT_PATH = path.resolve(__dirname, '..');
 
+var SOURCE_DIRNAME = 'src';
 var PUBLIC_DIRNAME = 'public';
 var STATIC_DIRNAME = 'static';
 var BUILD_DIRNAME = 'static/build';
@@ -13,21 +15,17 @@ var BUILD_DIRNAME = 'static/build';
 
 
 var config = {
-    env: {
-        isProduction: false,
-        isDevelopment: false
-    },
     publicPaths: {
         static: '/' + STATIC_DIRNAME + '/',
         build: '/' + BUILD_DIRNAME + '/'
     },
     paths: {
         root: ROOT_PATH,
-        app: path.resolve(ROOT_PATH, 'app'),
         public: path.resolve(ROOT_PATH, PUBLIC_DIRNAME),
         static: path.resolve(ROOT_PATH, PUBLIC_DIRNAME, STATIC_DIRNAME),
         build: path.resolve(ROOT_PATH, PUBLIC_DIRNAME, BUILD_DIRNAME),
-        views: path.resolve(ROOT_PATH, 'views')
+        source: path.resolve(ROOT_PATH, SOURCE_DIRNAME),
+        serverViews: path.resolve(ROOT_PATH, SOURCE_DIRNAME, 'server-views')
     },
     server: {
         publicFiles: [
@@ -53,11 +51,8 @@ var config = {
 };
 
 
-if (NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
     deepExtend(config, {
-        env: {
-            isDevelopment: true
-        },
         server: {
             host: 'localhost',
             port: 3000,
@@ -68,11 +63,8 @@ if (NODE_ENV === 'development') {
         }
     });
 
-} else if (NODE_ENV === 'production') {
+} else if (process.env.NODE_ENV === 'production') {
     deepExtend(config, {
-        env: {
-            isProduction: true
-        },
         server: {
             host: 'localhost',
             port: 2000,
@@ -81,7 +73,9 @@ if (NODE_ENV === 'development') {
     });
 
 } else {
-    throw new Error('ERROR: NODE_ENV is not specified: ' + NODE_ENV);
+    var errorText = '[' + path.basename(__filename) + '] ERROR: NODE_ENV is not set: ' + process.env.NODE_ENV;
+    console.log(chalk.red(errorText));
+    throw new Error(errorText);
 }
 
 

@@ -7,7 +7,7 @@ var assetsJsonPath = path.resolve(config.webpack.assetsPath, config.webpack.asse
 var webpackAssets;
 var assets;
 
-if (config.env.isProduction) {
+if (process.env.NODE_ENV === 'production') {
     // Require the file only once for efficiency
     // Note: like with any other require, you need to restart the server when that file changes
     assets = require(assetsJsonPath);

@@ -2,7 +2,7 @@
 
 //import webpackAssets from '../config/webpack-assets';
 
-var webpackAssets = require('../config/webpack-assets');
+var webpackAssets = require('../../config/webpack-assets');
 var React = require('react');
 
 var App = React.createClass({

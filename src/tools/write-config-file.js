@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
-var config = require('../config/variables');
+var config = require('../../config/variables');
 
 
 function writeConfigFile (filename, content) {

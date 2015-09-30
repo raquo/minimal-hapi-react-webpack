@@ -16,8 +16,8 @@ var BABEL = 'babel?stage=1'; // Transpile ES6/JSX into ES5. For stages see: http
 
 var commonConfig = {
     entry: {
-        app: path.resolve(config.paths.app, 'main-app'),
-        sandbox: path.resolve(config.paths.app, 'main-sandbox')
+        app: path.resolve(config.paths.source, 'main-app'),
+        sandbox: path.resolve(config.paths.source, 'main-sandbox')
     },
     resolve: {
         // Webpack tries appending these extensions when you require(moduleName)
@@ -32,7 +32,7 @@ var commonConfig = {
             {
                 test: /\.css$/,
                 loaders: ['style', 'css'], // Loaders are processed last-to-first
-                include: config.paths.app
+                include: config.paths.source
             }
         ]
     },
@@ -48,7 +48,7 @@ var commonConfig = {
 
 
 
-if (config.env.isDevelopment) {
+if (process.env.NODE_ENV === 'development') {
 
     // Dev config is merged with common config
     module.exports = webpackMerge(commonConfig, {
@@ -71,14 +71,14 @@ if (config.env.isDevelopment) {
                 {
                     test: JS_JSX,
                     loader: 'eslint-loader', // Lint all JS files before compiling the bundles (see .eslintrc for rules)
-                    include: config.paths.app
+                    include: config.paths.source
                 }
             ],
             loaders: [
                 {
                     test: JS_JSX,
                     loaders: ['react-hot', BABEL], // Enable hot module replacement for react components (as opposed to full page reloads)
-                    include: config.paths.app
+                    include: config.paths.source
                 }
             ]
         },
@@ -88,9 +88,9 @@ if (config.env.isDevelopment) {
         ]
     });
 
+} else if (process.env.NODE_ENV === 'production') {
 
-
-} else if (config.env.isProduction) {
+    // Production config is merged with common config
     module.exports = webpackMerge(commonConfig, {
         output: {
             path: config.paths.build  // Put bundle files in this directory (Note: dev server does not generate bundle files)
@@ -100,13 +100,9 @@ if (config.env.isDevelopment) {
                 {
                     test: JS_JSX,
                     loader: BABEL,
-                    include: config.paths.app
+                    include: config.paths.source
                 }
             ]
         }
     })
-
-
-} else {
-    console.log(chalk.red('[' + path.basename(__filename) + '] ERROR: NODE_ENV is not specified!'));
 }

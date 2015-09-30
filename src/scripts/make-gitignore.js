@@ -2,7 +2,7 @@
 
 var path = require('path');
 var writeConfigFile = require('../tools/write-config-file');
-var config = require('../config/variables');
+var config = require('../../config/variables');
 
 
 var gitIgnore = [
@@ -20,6 +20,7 @@ var gitIgnore = [
     'webpack-assets.json',
     '',
     'node_modules/*',
+    'npm-debug.log',
     '',
     path.relative(config.paths.root, config.paths.build)
 ];

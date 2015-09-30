@@ -12,5 +12,6 @@ nodemon.json
 webpack-assets.json
 
 node_modules/*
+npm-debug.log
 
 public/static/build

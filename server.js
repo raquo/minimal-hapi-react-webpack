@@ -32,14 +32,14 @@ server.register(plugins, function (err) {
     // Set up server side react views using Vision
     server.views({
         engines: {jsx: HapiReactViews},
-        path: config.paths.views
+        path: config.paths.serverViews
     });
 
     // Note: only one route per will be used to fulfill a request.
     // In case of multiple routes matching the URL, the most "specific" route wins.
     // See http://hapijs.com/api#path-matching-order
 
-    if (config.env.isDevelopment) {
+    if (process.env.NODE_ENV === 'development') {
         // Proxy webpack requests to webpack-dev-server
         // Note: in development webpack bundles are served from memory, not filesystem
         server.route({
