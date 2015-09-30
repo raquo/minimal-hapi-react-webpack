@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('./config/config');
+var config = require('./config/variables');
 var path = require('path');
 var Hapi = require('hapi');
 var H2o2 = require('h2o2');

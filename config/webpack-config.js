@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('./config');
+var config = require('./variables');
 var path = require('path');
 var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');

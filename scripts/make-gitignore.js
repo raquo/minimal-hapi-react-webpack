@@ -2,7 +2,7 @@
 
 var path = require('path');
 var writeConfigFile = require('../tools/write-config-file');
-var config = require('../config/config');
+var config = require('../config/variables');
 
 
 var gitIgnore = [
