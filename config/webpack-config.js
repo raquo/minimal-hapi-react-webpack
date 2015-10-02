@@ -3,7 +3,7 @@
 var config = require('./variables');
 var path = require('path');
 var webpack = require('webpack');
-var webpackMerge = require('webpack-merge');
+var webpackMerge = require('webpack-merge'); // concatenates arrays for the same key instead of replacing the first array
 var AssetsWebpackPlugin = require('assets-webpack-plugin');
 //var SlowWebpackPlugin = require('../tools/slow-webpack-plugin');
 
@@ -14,7 +14,7 @@ var BABEL = 'babel?stage=1'; // Transpile ES6/JSX into ES5. For stages see: http
 
 
 
-var commonConfig = {
+var baseConfig = {
     entry: {
         app: path.resolve(config.paths.source, 'main-app'),
         sandbox: path.resolve(config.paths.source, 'main-sandbox')
@@ -25,7 +25,9 @@ var commonConfig = {
         extensions: ['', '.js', '.jsx']
     },
     output: {
-        filename: config.webpack.outputFilename  // Bundle filename pattern
+        publicPath: config.publicPaths.build, // Expose bundles in this web directory (Note: only dev server uses this option)
+        filename: config.webpack.outputFilename, // Bundle filename pattern
+        path: config.paths.build  // Put bundle files in this directory (Note: dev server does not generate bundle files)
     },
     module: {
         loaders: [
@@ -39,6 +41,11 @@ var commonConfig = {
     plugins: [
         //new SlowWebpackPlugin({delay: 2000}),
         new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
         new AssetsWebpackPlugin({
             filename: config.webpack.assetsFilename,
             path: config.webpack.assetsPath
@@ -51,7 +58,7 @@ var commonConfig = {
 if (process.env.NODE_ENV === 'development') {
 
     // Dev config is merged with common config
-    module.exports = webpackMerge(commonConfig, {
+    module.exports = webpackMerge(baseConfig, {
         devtool: 'cheap-module-eval-source-map', // Generate source maps (more or less efficiently)
         devServer: {
             // Config for webpack-dev-server. See https://github.com/webpack/docs/wiki/webpack-dev-server#api
@@ -62,9 +69,6 @@ if (process.env.NODE_ENV === 'development') {
             colors: true,
             https: config.server.protocol === 'https',
             historyApiFallback: false
-        },
-        output: {
-            publicPath: config.publicPaths.build // Expose bundles in this web directory (dev server option)
         },
         module: {
             preLoaders: [
@@ -91,10 +95,8 @@ if (process.env.NODE_ENV === 'development') {
 } else if (process.env.NODE_ENV === 'production') {
 
     // Production config is merged with common config
-    module.exports = webpackMerge(commonConfig, {
-        output: {
-            path: config.paths.build  // Put bundle files in this directory (Note: dev server does not generate bundle files)
-        },
+    module.exports = webpackMerge(baseConfig, {
+        devtool: 'source-map', // generate full source maps
         module: {
             loaders: [
                 {
@@ -103,6 +105,13 @@ if (process.env.NODE_ENV === 'development') {
                     include: config.paths.source
                 }
             ]
-        }
+        },
+        plugins: [
+            new webpack.optimize.UglifyJsPlugin({
+                compressor: {
+                    warnings: false // Don't complain about things like removing unreachable code
+                }
+            })
+        ]
     })
 }
