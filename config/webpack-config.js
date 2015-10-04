@@ -18,7 +18,7 @@ var BABEL = 'babel?stage=1'; // Transpile ES6/JSX into ES5. For stages see: http
 
 var webpackConfig = {
     entry: {
-        app: [APP_ENTRY, WEBPACK_HOT_ENTRY]
+        app: APP_ENTRY
     },
     resolve: {
         // Webpack tries appending these extensions when you require(moduleName)

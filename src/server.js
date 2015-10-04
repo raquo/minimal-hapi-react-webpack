@@ -115,14 +115,16 @@ server.register(plugins, (err) => {
         }
     });
 
-    // Sandbox
-    server.route({
-        method: 'GET',
-        path: '/sandbox',
-        handler: {
-            view: 'sandbox' // sandbox.jsx in /views
-        }
-    });
+    // Dev sandbox
+    if (process.env.NODE_ENV === 'development') {
+        server.route({
+            method: 'GET',
+            path: '/sandbox',
+            handler: {
+                view: 'sandbox' // sandbox.jsx in /views
+            }
+        });
+    }
 
     server.start(() => {
         console.log('Hapi server started!');

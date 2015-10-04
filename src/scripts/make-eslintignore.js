@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var writeConfigFile = require('../tools/write-config-file');
+var FileWriter = require('../tools/file-writer');
 var config = require('../../config/variables');
 
 
@@ -16,5 +16,5 @@ var eslintIgnore = [
 
 
 module.exports = function () {
-    writeConfigFile('.eslintignore', eslintIgnore.join('\n'));
+    FileWriter.write('.eslintignore', eslintIgnore.join('\n'));
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var writeConfigFile = require('../tools/write-config-file');
+var FileWriter = require('../tools/file-writer');
 var config = require('../../config/variables');
 
 
@@ -25,5 +25,5 @@ var nodemonConfig = {
 
 
 module.exports = function () {
-    writeConfigFile('nodemon.json', JSON.stringify(nodemonConfig, null, 2));
+    FileWriter.write('nodemon.json', JSON.stringify(nodemonConfig, null, 2));
 };

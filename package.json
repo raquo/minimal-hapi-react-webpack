@@ -18,9 +18,11 @@
   },
   "main": "src/server.js",
   "scripts": {
-    "dev": "NODE_ENV=development node_modules/.bin/nodemon --harmony",
+    "start": "NODE_ENV=production node --harmony src/server.js",
+    "dev": "NODE_ENV=development node_modules/.bin/nodemon --harmony src/server.js",
     "make": "NODE_ENV=development node --harmony src/scripts/make.js",
-    "build": "NODE_ENV=production webpack -p --config config/webpack-config.js",
+    "build": "NODE_ENV=production node --harmony src/scripts/make.js && NODE_ENV=production webpack -p --config config/webpack-config.js",
+    "clean": "node --harmony src/scripts/clean.js",
     "webpack": "NODE_ENV=development node --harmony src/webpackDevServer.js",
     "lint": "eslint . --ext .js --ext .jsx"
   },
@@ -34,6 +36,7 @@
     "inert": "^3.0.1",
     "react": "^0.13.3",
     "react-transform-hmr": "^1.0.1",
+    "rimraf": "^2.4.3",
     "vision": "^3.0.0",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.3.0"

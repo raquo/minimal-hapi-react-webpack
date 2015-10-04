@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var writeConfigFile = require('../tools/write-config-file');
+var FileWriter = require('../tools/file-writer');
 var config = require('../../config/variables');
 
 
@@ -28,5 +28,5 @@ var gitIgnore = [
 
 
 module.exports = function () {
-    writeConfigFile('.gitignore', gitIgnore.join('\n'));
+    FileWriter.write('.gitignore', gitIgnore.join('\n'));
 };
