@@ -2,7 +2,7 @@
 
 var path = require('path');
 var FileWriter = require('../tools/file-writer');
-var config = require('../../config/variables');
+var config = require('../config/variables');
 
 
 var nodemonConfig = {

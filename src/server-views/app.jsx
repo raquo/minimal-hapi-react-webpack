@@ -1,8 +1,6 @@
 'use strict';
 
-//import webpackAssets from '../config/webpack-assets';
-
-var webpackAssets = require('../../config/webpack-assets');
+var getWebpackAssets = require('../tools/get-webpack-assets');
 var React = require('react');
 
 var App = React.createClass({
@@ -13,7 +11,7 @@ var App = React.createClass({
                 <head>
                     <meta charSet='utf-8' />
                     <title>Main App</title>
-                    <script src={webpackAssets().app.js}></script>
+                    <script src={getWebpackAssets().app.js}></script>
                 </head>
                 <body>
                     <p>Hello world, this layout is rendered by a <strong>server-side</strong> react view (views/app.jsx)</p>

@@ -6,8 +6,8 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
-var config = require('../config/variables');
-var webpackConfig = require('../config/webpack-config');
+var config = require('./config/variables');
+var webpackConfig = require('./config/webpack-config');
 
 
 var app = express();
@@ -21,8 +21,6 @@ app.use(webpackDevMiddleware(compiler, {
         colors: true
     }
 }));
-
-webpackConfig.entry
 
 
 app.use(webpackHotMiddleware(compiler));

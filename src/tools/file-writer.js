@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var rimraf = require('rimraf');
 var chalk = require('chalk');
-var config = require('../../config/variables');
+var config = require('../config/variables');
 
 
 var logPrefix = '[' + path.basename(__filename) + '] ';

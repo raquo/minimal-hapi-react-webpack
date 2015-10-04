@@ -1,10 +1,15 @@
 'use strict';
 
-var config = require('./variables');
+var config = require('./../config/variables');
 var path = require('path');
 
 var assetsJsonPath = path.resolve(config.webpack.assetsPath, config.webpack.assetsFilename);
-var webpackAssets;
+
+/**
+ * @type {function}
+ * @returns {object}
+ */
+var getWebpackAssets;
 var assets;
 
 if (process.env.NODE_ENV === 'production') {
@@ -12,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
     // Note: like with any other require, you need to restart the server when that file changes
     assets = require(assetsJsonPath);
 
-    webpackAssets = function () {
+    getWebpackAssets = () => {
         return assets;
     };
 
@@ -20,12 +25,11 @@ if (process.env.NODE_ENV === 'production') {
     var fs = require('fs');
     var chalk = require('chalk');
 
-    webpackAssets = function () {
+    getWebpackAssets = () => {
         // On dev we read the file every time we need it. Not efficient, but easy to work with.
         var fileContents = fs.readFileSync(assetsJsonPath).toString();
         try {
-            assets = JSON.parse(fileContents);
-            return assets;
+            return JSON.parse(fileContents);
 
         } catch (err) {
             console.log(chalk.red('ERROR: Could not parse ' + config.webpack.assetsFilename + ' - maybe webpack is still processing?'));
@@ -34,4 +38,4 @@ if (process.env.NODE_ENV === 'production') {
     };
 }
 
-module.exports = webpackAssets;
+module.exports = getWebpackAssets;

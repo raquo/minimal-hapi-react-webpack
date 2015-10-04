@@ -44,7 +44,7 @@
     "no-sparse-arrays": 2,
     "no-unreachable": 1,
     "use-isnan": 2,
-    "valid-jsdoc": 1,
+    "valid-jsdoc": [1, {"requireParamDescription": false, "requireReturn": false}],
     "valid-typeof": 2,
     "no-unexpected-multiline": 1,
 

@@ -5,7 +5,7 @@ var path = require('path');
 var chalk = require('chalk');
 
 // This and anything in config.paths must be absolute.
-var ROOT_PATH = path.resolve(__dirname, '..');
+var ROOT_PATH = path.resolve(__dirname, '../..');
 
 var SOURCE_DIRNAME = 'src';
 var PUBLIC_DIRNAME = 'public';

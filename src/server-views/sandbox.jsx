@@ -1,6 +1,6 @@
 'use strict';
 
-var webpackAssets = require('../../config/webpack-assets');
+var getWebpackAssets = require('../tools/get-webpack-assets');
 var React = require('react');
 
 var Sandbox = React.createClass({
@@ -11,7 +11,7 @@ var Sandbox = React.createClass({
                 <head>
                     <meta charSet='utf-8' />
                     <title>Sandbox</title>
-                    <script src={webpackAssets().sandbox.js}></script>
+                    <script src={getWebpackAssets().sandbox.js}></script>
                 </head>
                 <body>
                     <p>
