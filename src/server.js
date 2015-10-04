@@ -90,7 +90,7 @@ server.register(plugins, (err) => {
                 path: '/' + filename,
                 handler: {
                     file: {
-                        path: path.resolve(config.paths.public, filename)
+                        path: path.join(config.paths.public, filename)
                     }
                 }
             });

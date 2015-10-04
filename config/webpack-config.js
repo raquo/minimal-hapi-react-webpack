@@ -9,7 +9,7 @@ var config = require('./variables');
 
 
 
-var APP_ENTRY = path.resolve(config.paths.source, 'main-app');
+var APP_ENTRY = path.join(config.paths.source, 'main-app');
 var WEBPACK_HOT_ENTRY = 'webpack-hot-middleware/client';
 var JS_JSX = /\.(js|jsx)$/;
 var BABEL = 'babel?stage=1'; // Transpile ES6/JSX into ES5. For stages see: http://babeljs.io/docs/usage/experimental/
@@ -62,7 +62,7 @@ if (process.env.NODE_ENV === 'development') {
     webpackConfig = webpackMerge(webpackConfig, {
         entry: {
             app: [APP_ENTRY, WEBPACK_HOT_ENTRY],
-            sandbox: [path.resolve(config.paths.source, 'main-sandbox'), WEBPACK_HOT_ENTRY]
+            sandbox: [path.join(config.paths.source, 'main-sandbox'), WEBPACK_HOT_ENTRY]
         },
         module: {
             preLoaders: [

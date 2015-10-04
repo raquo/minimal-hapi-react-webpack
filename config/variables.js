@@ -4,6 +4,7 @@ var deepExtend = require('deep-extend');
 var path = require('path');
 var chalk = require('chalk');
 
+// This and anything in config.paths must be absolute.
 var ROOT_PATH = path.resolve(__dirname, '..');
 
 var SOURCE_DIRNAME = 'src';
@@ -20,12 +21,12 @@ var config = {
     },
     paths: {
         root: ROOT_PATH,
-        public: path.resolve(ROOT_PATH, PUBLIC_DIRNAME),
-        static: path.resolve(ROOT_PATH, PUBLIC_DIRNAME, STATIC_DIRNAME),
-        build: path.resolve(ROOT_PATH, PUBLIC_DIRNAME, BUILD_DIRNAME),
-        source: path.resolve(ROOT_PATH, SOURCE_DIRNAME),
-        components: path.resolve(ROOT_PATH, SOURCE_DIRNAME, 'components'),
-        serverViews: path.resolve(ROOT_PATH, SOURCE_DIRNAME, 'server-views')
+        public: path.join(ROOT_PATH, PUBLIC_DIRNAME),
+        static: path.join(ROOT_PATH, PUBLIC_DIRNAME, STATIC_DIRNAME),
+        build: path.join(ROOT_PATH, PUBLIC_DIRNAME, BUILD_DIRNAME),
+        source: path.join(ROOT_PATH, SOURCE_DIRNAME),
+        components: path.join(ROOT_PATH, SOURCE_DIRNAME, 'components'),
+        serverViews: path.join(ROOT_PATH, SOURCE_DIRNAME, 'server-views')
     },
     server: {
         publicFiles: [
