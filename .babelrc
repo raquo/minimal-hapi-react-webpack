@@ -10,12 +10,6 @@
                             "transform": "react-transform-hmr", // Add hot module reloading support to react components
                             "imports": ["react"],
                             "locals": ["module"]
-                        }, {
-                            "transform": "react-transform-catch-errors", // Show errors with a big red screen of death
-                            "imports": [
-                                "react",
-                                "redbox-react" // See https://github.com/KeywordBrain/redbox-react
-                            ]
                         }
                     ]
                 }
