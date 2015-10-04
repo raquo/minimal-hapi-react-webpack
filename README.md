@@ -40,7 +40,7 @@ You need node.js 0.12 installed on your machine. If using OS X, best to install 
 * `cd` into project folder
 * `npm install` to install dependencies
 * `npm run dev` to start Hapi application server
-* `npm run webpack` to start webpack dev server with hot module reloading
+* `npm run webpack` in another terminal session to start webpack dev server with hot module reloading
 * Visit [http://localhost:3000](http://localhost:3000) and open your browser's web development console
 * Try changing and saving src/components/counter.css – you'll see the changes applied to the page without the page itself reloading. How cool is that, eh?
 * ESLint errors are printed into webpack dev server output and also into the browser's console. To run ESLint separately from that, do `npm run lint`.
