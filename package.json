@@ -1,6 +1,6 @@
 {
   "name": "minimal-hapi-react-webpack-hmr-sandbox",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Minimal Hapi + React + Webpack + HMR (hot module reloading) Sandbox",
   "keywords": [
     "hapi",
@@ -19,7 +19,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "NODE_ENV=production     node --harmony src/server.js",
-    "build": "NODE_ENV=production     node --harmony src/scripts/make.js  &&  NODE_ENV=production   webpack -p --config config/webpack-config.js",
+    "build": "NODE_ENV=production     node --harmony src/scripts/make.js  &&  NODE_ENV=production   webpack -p --config src/config/webpack-config.js",
     "webpack": "NODE_ENV=development  node --harmony src/scripts/make.js  &&  NODE_ENV=development  node --harmony src/webpackDevServer.js",
     "dev": "NODE_ENV=development      node --harmony src/scripts/make.js  &&  NODE_ENV=development  node_modules/.bin/nodemon --harmony src/server.js",
     "make": "NODE_ENV=development     node --harmony src/scripts/make.js",
