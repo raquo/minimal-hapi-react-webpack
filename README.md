@@ -14,6 +14,8 @@ You can use this starter kit to efficiently develop react components and applica
 * Hapi.js proxies webpack requests to webpack dev server
 * Hapi.js is configured to server static files, and a couple example routes
 * A separate sandbox entry point is set up for white room component development
+* Sample client-side React view with a counter to easily test hot module reloading (any time the page does a full reload, the counter resets).
+* Server-side React views instead of index.html (see /server-views). Isomorphism is easy to configure if needed using the same dependency.
 * Automatic application server reloading using nodemon
 * Babel transpilation of ES6 into browser-compatible ES5. Use all the fancy stuff today!
 * Webpack assets are generated with content hashes in filenames for easy cache busting
