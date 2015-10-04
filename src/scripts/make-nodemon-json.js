@@ -14,11 +14,12 @@ var nodemonConfig = {
     env: {
         NODE_ENV: process.env.NODE_ENV
     },
-    delay: 100,
+    delay: 200, // Debounce nodemon restarts. Note: nodemon restarting too often can screw with HMR.
     ignore: [
         '.idea',
         '.sass-cache',
-        path.relative(config.paths.root, config.paths.public) +  '/*'
+        path.relative(config.paths.root, config.paths.components) + '/*', // ignore frontend files to minimize server restarts
+        path.relative(config.paths.root, config.paths.public) + '/*' // ignore compiled bundles & static frontend files
     ]
 };
 

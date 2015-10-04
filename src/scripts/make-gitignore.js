@@ -22,7 +22,8 @@ var gitIgnore = [
     'node_modules/*',
     'npm-debug.log',
     '',
-    path.relative(config.paths.root, config.paths.build)
+    path.relative(config.paths.root, config.paths.build),
+    ''
 ];
 
 

@@ -7,7 +7,7 @@ require('./main-app.css');
 
 
 
-function mainApp() {
+function mainApp () {
     React.render(
         React.createElement(Counter),
         document.getElementById('counterContainer')

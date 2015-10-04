@@ -4,7 +4,6 @@ var deepExtend = require('deep-extend');
 var path = require('path');
 var chalk = require('chalk');
 
-var NODE_ENV = process.env.NODE_ENV;
 var ROOT_PATH = path.resolve(__dirname, '..');
 
 var SOURCE_DIRNAME = 'src';
@@ -25,6 +24,7 @@ var config = {
         static: path.resolve(ROOT_PATH, PUBLIC_DIRNAME, STATIC_DIRNAME),
         build: path.resolve(ROOT_PATH, PUBLIC_DIRNAME, BUILD_DIRNAME),
         source: path.resolve(ROOT_PATH, SOURCE_DIRNAME),
+        components: path.resolve(ROOT_PATH, SOURCE_DIRNAME, 'components'),
         serverViews: path.resolve(ROOT_PATH, SOURCE_DIRNAME, 'server-views')
     },
     server: {
@@ -85,7 +85,7 @@ config.server.rootUrl = [
     config.server.host,
     ':',
     config.server.port
-].join();
+].join('');
 
 
 Object.freeze(config); // On a separate line because IntelliJ's JS code assistance is not very smart :(

@@ -17,7 +17,7 @@ function SlowWebpackPlugin (options) {
 SlowWebpackPlugin.prototype.apply = function (compiler) {
     var delay = this.options.delay;
 
-    compiler.plugin('done', function (compiler) {
+    compiler.plugin('done', () => {
         var beginTime = Date.now();
         var curTime = beginTime;
         var secondsElapsed = 0;

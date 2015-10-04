@@ -1,23 +1,24 @@
 'use strict';
 
-var config = require('./variables');
 var path = require('path');
 var webpack = require('webpack');
 var webpackMerge = require('webpack-merge'); // concatenates arrays for the same key instead of replacing the first array
 var AssetsWebpackPlugin = require('assets-webpack-plugin');
 //var SlowWebpackPlugin = require('../tools/slow-webpack-plugin');
+var config = require('./variables');
 
 
 
+var APP_ENTRY = path.resolve(config.paths.source, 'main-app');
+var WEBPACK_HOT_ENTRY = 'webpack-hot-middleware/client';
 var JS_JSX = /\.(js|jsx)$/;
 var BABEL = 'babel?stage=1'; // Transpile ES6/JSX into ES5. For stages see: http://babeljs.io/docs/usage/experimental/
 
 
 
-var baseConfig = {
+var webpackConfig = {
     entry: {
-        app: path.resolve(config.paths.source, 'main-app'),
-        sandbox: path.resolve(config.paths.source, 'main-sandbox')
+        app: [APP_ENTRY, WEBPACK_HOT_ENTRY]
     },
     resolve: {
         // Webpack tries appending these extensions when you require(moduleName)
@@ -29,6 +30,7 @@ var baseConfig = {
         filename: config.webpack.outputFilename, // Bundle filename pattern
         path: config.paths.build  // Put bundle files in this directory (Note: dev server does not generate bundle files)
     },
+    devtool: 'cheap-module-eval-source-map', // Generate source maps (more or less efficiently)
     module: {
         loaders: [
             {
@@ -57,18 +59,10 @@ var baseConfig = {
 
 if (process.env.NODE_ENV === 'development') {
 
-    // Dev config is merged with common config
-    module.exports = webpackMerge(baseConfig, {
-        devtool: 'cheap-module-eval-source-map', // Generate source maps (more or less efficiently)
-        devServer: {
-            // Config for webpack-dev-server. See https://github.com/webpack/docs/wiki/webpack-dev-server#api
-            port: config.webpack.port,
-            contentBase: config.paths.public, // serve content from here (e.g. index.html)
-            hot: true, // Enable HMR (hot module reloading) on the server
-            inline: true, // Add webpack dev server entry point (ember WDS runtime into the bundle)
-            colors: true,
-            https: config.server.protocol === 'https',
-            historyApiFallback: false
+    webpackConfig = webpackMerge(webpackConfig, {
+        entry: {
+            app: [APP_ENTRY, WEBPACK_HOT_ENTRY],
+            sandbox: [path.resolve(config.paths.source, 'main-sandbox'), WEBPACK_HOT_ENTRY]
         },
         module: {
             preLoaders: [
@@ -89,13 +83,17 @@ if (process.env.NODE_ENV === 'development') {
         plugins: [
             new webpack.HotModuleReplacementPlugin(), // Enables HMR. Adds webpack/hot/dev-server entry point if hot=true
             new webpack.NoErrorsPlugin() // @TODO do we really want / need this? On dev or on production too?
-        ]
+        ],
+        eslint: {
+            //failOnWarning: true,
+            failOnError: true
+        }
     });
 
 } else if (process.env.NODE_ENV === 'production') {
 
-    // Production config is merged with common config
-    module.exports = webpackMerge(baseConfig, {
+    /** @lends webpackConfig */
+    webpackConfig = webpackMerge(webpackConfig, {
         devtool: 'source-map', // generate full source maps
         module: {
             loaders: [
@@ -113,5 +111,8 @@ if (process.env.NODE_ENV === 'development') {
                 }
             })
         ]
-    })
+    });
 }
+
+
+module.exports = webpackConfig;

@@ -5,7 +5,7 @@ var Counter = require('./components/counter');
 
 require('./main-sandbox.css');
 
-function mainSandbox() {
+function mainSandbox () {
     React.render(
         React.createElement(Counter),
         document.getElementById('counterContainer')

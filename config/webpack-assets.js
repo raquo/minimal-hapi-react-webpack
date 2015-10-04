@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 
     webpackAssets = function () {
         return assets;
-    }
+    };
 
 } else {
     var fs = require('fs');

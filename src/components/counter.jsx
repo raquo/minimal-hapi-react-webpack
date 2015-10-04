@@ -3,6 +3,10 @@
 var React = require('react');
 require('./counter.css');
 
+/**
+ * @class Counter
+ * @extends ReactComponent
+ */
 class Counter extends React.Component {
 
     constructor (props) {
@@ -12,7 +16,10 @@ class Counter extends React.Component {
             counter: 0
         };
 
-        setInterval(this.add.bind(this), 1000);
+        this.increment = this.increment.bind(this);
+        this.remove = this.remove.bind(this);
+
+        setInterval(this.increment.bind(this), 1000);
     }
 
     render () {
@@ -26,19 +33,19 @@ class Counter extends React.Component {
                 <p>This is called <em>hot module reloading</em> and is more useful than just auto-reloading the whole page (if you reload the page, you'll see the counter drops to zero because component state is not persisted).</p>
 
                 <span className='-number'>{this.state.counter}</span>
-                <button className='-button' type='button' onClick={ this.add.bind(this) }>+</button>
-                <button className='-button' type='button' onClick={ this.remove.bind(this) }>–</button>
+                <button className='-button' type='button' onClick={this.increment.bind(this)}>+</button>
+                <button className='-button' type='button' onClick={this.remove.bind(this)}>–</button>
 
             </div>
         );
     }
 
-    add () {
-        this.setState({counter: this.state.counter + 1});
+    increment () {
+        super.setState({counter: this.state.counter + 1});
     }
 
     remove () {
-        this.setState({counter: this.state.counter - 1});
+        super.setState({counter: this.state.counter - 1});
     }
 }
 

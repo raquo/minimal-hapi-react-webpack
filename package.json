@@ -16,23 +16,29 @@
     "type": "git",
     "url": "https://github.com/raquo/minimal-hapi-react-webpack"
   },
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "NODE_ENV=development node_modules/.bin/nodemon",
-    "make": "NODE_ENV=development node src/scripts/make.js",
+    "dev": "NODE_ENV=development node_modules/.bin/nodemon --harmony",
+    "make": "NODE_ENV=development node --harmony src/scripts/make.js",
     "build": "NODE_ENV=production webpack -p --config config/webpack-config.js",
-    "webpack": "NODE_ENV=development webpack-dev-server --config config/webpack-config.js",
+    "webpack": "NODE_ENV=development node --harmony src/webpackDevServer.js",
     "lint": "eslint . --ext .js --ext .jsx"
   },
   "dependencies": {
     "assets-webpack-plugin": "^2.2.3",
+    "babel-plugin-react-transform": "^1.1.1",
     "chalk": "^1.1.1",
     "deep-extend": "^0.4.0",
     "hapi": "^10.1.0",
     "hapi-react-views": "^3.1.3",
     "inert": "^3.0.1",
     "react": "^0.13.3",
-    "vision": "^3.0.0"
+    "react-transform-catch-errors": "^1.0.0",
+    "react-transform-hmr": "^1.0.1",
+    "redbox-react": "^1.1.1",
+    "vision": "^3.0.0",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",

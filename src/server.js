@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('./config/variables');
+var config = require('./../config/variables');
 var path = require('path');
 var Hapi = require('hapi');
 var H2o2 = require('h2o2');
@@ -22,7 +22,7 @@ server.connection({
     port: config.server.port
 });
 
-server.register(plugins, function (err) {
+server.register(plugins, (err) => {
 
     if (err) {
         console.error(err);
@@ -48,7 +48,20 @@ server.register(plugins, function (err) {
             handler: {
                 proxy: {
                     host: config.server.host,
-                    port: config.webpack.port
+                    port: config.webpack.port,
+                    passThrough: true
+                }
+            }
+        });
+
+        server.route({
+            method: 'GET',
+            path: '/__webpack_hmr', // this includes HMR patches, not just webpack bundle files
+            handler: {
+                proxy: {
+                    host: config.server.host,
+                    port: config.webpack.port,
+                    passThrough: true
                 }
             }
         });
@@ -71,7 +84,7 @@ server.register(plugins, function (err) {
 
     // Serve white-listed files from the public directory
     config.server.publicFiles.forEach(
-        function (filename) {
+        (filename) => {
             server.route({
                 method: 'GET',
                 path: '/' + filename,
@@ -88,7 +101,7 @@ server.register(plugins, function (err) {
     server.route({
         method: 'GET',
         path: '/{path*}',
-        handler: function (request, reply) {
+        handler: (request, reply) => {
             reply('Hapi catch-all view for /' + encodeURIComponent(request.params.path));
         }
     });
@@ -111,7 +124,7 @@ server.register(plugins, function (err) {
         }
     });
 
-    server.start(function () {
+    server.start(() => {
         console.log('Hapi server started!');
     });
 });

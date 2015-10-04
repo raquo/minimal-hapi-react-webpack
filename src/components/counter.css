@@ -1,5 +1,6 @@
 .Counter {
     max-width: 400px;
+    /*background: #ffcccc;*/
 }
 
 .Counter .-number {
