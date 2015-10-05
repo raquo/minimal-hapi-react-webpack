@@ -77,6 +77,6 @@ If something's not working in my setup, please [file an issue](https://github.co
 
 Nikita Gazarov
 
-[nikita@raquo.com](nikita@raquo.com)
+[nikita@raquo.com](mailto:nikita@raquo.com)
 
 [@raquo](https://twitter.com/raquo)
