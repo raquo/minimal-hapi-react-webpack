@@ -3,7 +3,6 @@
 var config = require('./config/variables');
 var path = require('path');
 var Hapi = require('hapi');
-var H2o2 = require('h2o2');
 var Inert = require('inert');
 var Vision = require('vision');
 var HapiReactViews = require('hapi-react-views');
@@ -11,16 +10,25 @@ var HapiReactViews = require('hapi-react-views');
 
 
 var server = new Hapi.Server();
-var plugins = [
-    {register: Inert}, // enables serving static files (file and directory handlers)
-    {register: H2o2},  // enables proxying requests to webpack dev server (proxy handler)
-    {register: Vision} // enables rendering views with custom engines (view handler)
-];
 
 server.connection({
     host: config.server.host,
     port: config.server.port
 });
+
+
+
+var plugins = [
+    {register: Inert}, // enables serving static files (file and directory handlers)
+    {register: Vision} // enables rendering views with custom engines (view handler)
+];
+// Enable proxying requests to webpack dev server (proxy handler)
+if (process.env.NODE_ENV === 'development') {
+    var H2o2 = require('h2o2');
+    plugins.push({register: H2o2});
+}
+
+
 
 server.register(plugins, (err) => {
 
@@ -38,34 +46,6 @@ server.register(plugins, (err) => {
     // Note: only one route per will be used to fulfill a request.
     // In case of multiple routes matching the URL, the most "specific" route wins.
     // See http://hapijs.com/api#path-matching-order
-
-    if (process.env.NODE_ENV === 'development') {
-        // Proxy webpack requests to webpack-dev-server
-        // Note: in development webpack bundles are served from memory, not filesystem
-        server.route({
-            method: 'GET',
-            path: config.publicPaths.build + '{path*}', // this includes HMR patches, not just webpack bundle files
-            handler: {
-                proxy: {
-                    host: config.server.host,
-                    port: config.webpack.port,
-                    passThrough: true
-                }
-            }
-        });
-
-        server.route({
-            method: 'GET',
-            path: '/__webpack_hmr', // this includes HMR patches, not just webpack bundle files
-            handler: {
-                proxy: {
-                    host: config.server.host,
-                    port: config.webpack.port,
-                    passThrough: true
-                }
-            }
-        });
-    }
 
     // Serve all files from the static directory
     // Note: in production this also serves webpack bundles
@@ -115,8 +95,37 @@ server.register(plugins, (err) => {
         }
     });
 
-    // Dev sandbox
+
+    // DEV SETUP
     if (process.env.NODE_ENV === 'development') {
+        // Proxy webpack assets requests to webpack-dev-server
+        // Note: in development webpack bundles are served from memory, not filesystem
+        server.route({
+            method: 'GET',
+            path: config.publicPaths.build + '{path*}', // this includes HMR patches, not just webpack bundle files
+            handler: {
+                proxy: {
+                    host: config.server.host,
+                    port: config.webpack.port,
+                    passThrough: true
+                }
+            }
+        });
+
+        // Proxy webpack HMR requests to webpack-dev-server
+        server.route({
+            method: 'GET',
+            path: '/__webpack_hmr', // this includes HMR patches, not just webpack bundle files
+            handler: {
+                proxy: {
+                    host: config.server.host,
+                    port: config.webpack.port,
+                    passThrough: true
+                }
+            }
+        });
+
+        // Enable a separate sandbox
         server.route({
             method: 'GET',
             path: '/sandbox',
