@@ -1,0 +1,4 @@
+# This is webpck build output directory.
+# Ignore everything except this .gitignore file
+*
+!.gitignore

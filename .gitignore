@@ -10,5 +10,4 @@ webpack-assets.json
 node_modules/*
 npm-debug.log
 
-# Webpack build output directory. Defined in src/config/variables.js
-public/static/build
+# Note: Webpack output directory is ignored using a gitignore file located in it.
