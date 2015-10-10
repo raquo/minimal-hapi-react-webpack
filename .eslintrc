@@ -17,8 +17,6 @@
   "rules": {
     // All eslint rules: http://eslint.org/docs/rules/
     "strict": [1, "global"],
-    "no-use-before-define": 2,
-    "jsx-quotes": [1, "prefer-single"],
 
     // Possible errors
 //    "comma-dangle": [1, "always-multiline"],
@@ -97,6 +95,7 @@
     "no-undef-init": 2,
     "no-undef": 2,
     "no-unused-vars": 1,
+    "no-use-before-define": 1,
 
     // Node.js & CommonJS
     "no-mixed-requires": 2,
