@@ -8,22 +8,22 @@ var chalk = require('chalk');
 var ROOT_PATH = path.resolve(__dirname, '../..');
 
 var SOURCE_DIRNAME = 'src';
-var PUBLIC_DIRNAME = 'public';
-var STATIC_DIRNAME = 'static';
+var WEB_ROOT_DIRNAME = 'public';
+var ASSETS_DIRNAME = 'static';
 var BUILD_DIRNAME = 'static/build';
 
 
 
 var config = {
     publicPaths: {
-        static: '/' + STATIC_DIRNAME + '/',
+        assets: '/' + ASSETS_DIRNAME + '/',
         build: '/' + BUILD_DIRNAME + '/'
     },
     paths: {
         root: ROOT_PATH,
-        public: path.join(ROOT_PATH, PUBLIC_DIRNAME),
-        static: path.join(ROOT_PATH, PUBLIC_DIRNAME, STATIC_DIRNAME),
-        build: path.join(ROOT_PATH, PUBLIC_DIRNAME, BUILD_DIRNAME), // Do not keep any non-generated files here.
+        webRoot: path.join(ROOT_PATH, WEB_ROOT_DIRNAME),
+        assets: path.join(ROOT_PATH, WEB_ROOT_DIRNAME, ASSETS_DIRNAME),
+        build: path.join(ROOT_PATH, WEB_ROOT_DIRNAME, BUILD_DIRNAME), // Do not keep any non-generated files here.
         source: path.join(ROOT_PATH, SOURCE_DIRNAME),
         components: path.join(ROOT_PATH, SOURCE_DIRNAME, 'components'),
         serverViews: path.join(ROOT_PATH, SOURCE_DIRNAME, 'server-views')

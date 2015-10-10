@@ -47,14 +47,14 @@ server.register(plugins, (err) => {
     // In case of multiple routes matching the URL, the most "specific" route wins.
     // See http://hapijs.com/api#path-matching-order
 
-    // Serve all files from the static directory
+    // Serve all files from the assets directory
     // Note: in production this also serves webpack bundles
     server.route({
         method: 'GET',
-        path: config.publicPaths.static + '{path*}',
+        path: config.publicPaths.assets + '{path*}',
         handler: {
             directory: {
-                path: config.paths.static,
+                path: config.paths.assets,
                 index: false,
                 listing: false,
                 showHidden: false
@@ -62,7 +62,7 @@ server.register(plugins, (err) => {
         }
     });
 
-    // Serve white-listed files from the public directory
+    // Serve white-listed files from the webRoot directory
     config.server.publicFiles.forEach(
         (filename) => {
             server.route({
@@ -70,7 +70,7 @@ server.register(plugins, (err) => {
                 path: '/' + filename,
                 handler: {
                     file: {
-                        path: path.join(config.paths.public, filename)
+                        path: path.join(config.paths.webRoot, filename)
                     }
                 }
             });
