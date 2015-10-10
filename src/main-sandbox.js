@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react');
-var Counter = require('./components/counter');
-
 if (process.env.NODE_ENV !== 'development') {
     throw new Error('ERROR: Sandbox is only intended for dev environment');
 }
+
+var React = require('react');
+var Counter = require('./components/counter');
 
 require('./main-sandbox.css');
 
