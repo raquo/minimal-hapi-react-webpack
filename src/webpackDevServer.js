@@ -7,8 +7,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
 if (process.env.NODE_ENV !== 'development') {
-    console.log(chalk.red('ERROR: Webpack dev server only works in dev environment'));
-    return;
+    throw new Error('ERROR: Webpack dev server only works in dev environment');
 }
 
 var config = require('./config/variables');

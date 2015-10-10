@@ -50,7 +50,8 @@ var webpackConfig = {
         }),
         new AssetsWebpackPlugin({
             filename: config.webpack.assetsFilename,
-            path: config.webpack.assetsPath
+            path: config.webpack.assetsPath,
+            prettyPrint: true
         })
     ]
 };
