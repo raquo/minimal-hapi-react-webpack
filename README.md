@@ -32,7 +32,7 @@ You can use this starter kit to efficiently develop react components and applica
 
 ### Global dependencies
 
-You need nodemon 1.6+ and node.js 0.12 installed on your machine. If using OS X, best to install node using [Homebrew](http://brew.sh/). Node 4.x should work too, but I didn't test it yet.
+You need node.js v4+ and nodemon v1.6+ installed on your machine. If using OS X, best to install node using [Homebrew](http://brew.sh/). Node v0.12 might work too, but I don't test it anymore.
 
 ### Development
 
@@ -58,11 +58,6 @@ You need nodemon 1.6+ and node.js 0.12 installed on your machine. If using OS X,
 * Hot module reloading only works for react components and CSS files.
 * If you change files that cause nodemon to reload, HMR will temporarily break and you'll need to reload the page manually (or make another change to another file that is covered by HMR but does not trigger a server reload).
 * If you edit webpack-config.js or change the contents of node_modules (e.g. by installing a new dependency), you'll need to restart webpack dev server.
-
-## TODO
-
-* Move to Node.js 4.x
-* Use my common .eslintrc
 
 ## Resources
 
