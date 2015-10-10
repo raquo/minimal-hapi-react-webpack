@@ -1,6 +1,6 @@
 {
   "name": "minimal-hapi-react-webpack-hmr-sandbox",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Minimal Hapi + React + Webpack + HMR (hot module reloading) Sandbox",
   "keywords": [
     "hapi",
