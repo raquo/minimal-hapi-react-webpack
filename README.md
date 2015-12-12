@@ -32,7 +32,7 @@ You can use this starter kit to efficiently develop react components and applica
 
 ### Dependencies
 
-* You need node.js v4+ and nodemon v1.6+ installed globally on your machine. If using OS X, best to install node using [Homebrew](http://brew.sh/). Node v0.12 might work too, but I don't test it anymore.
+* You need node.js v4+ installed globally on your machine. If using OS X, best to install node using [Homebrew](http://brew.sh/). Node v0.12 might work too, but I don't test it anymore.
 * npm `devDependencies` are required to develop on and build the project.
 * npm `dependencies` are the only ones that are required to run the app in production once it has been built.
 

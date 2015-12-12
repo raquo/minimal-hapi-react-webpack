@@ -21,7 +21,7 @@
     "start": "NODE_ENV=production     node --harmony src/server.js",
     "build": "NODE_ENV=production     node --harmony src/scripts/make.js  &&  NODE_ENV=production   webpack -p --config src/config/webpack-config.js",
     "webpack": "NODE_ENV=development  node --harmony src/scripts/make.js  &&  NODE_ENV=development  node --harmony src/webpack-dev-server.js",
-    "dev": "NODE_ENV=development      node --harmony src/scripts/make.js  &&  NODE_ENV=development  nodemon --harmony src/server.js",
+    "dev": "NODE_ENV=development      node --harmony src/scripts/make.js  &&  NODE_ENV=development  ./node_modules/nodemon/bin/nodemon.js --harmony src/server.js",
     "make": "NODE_ENV=development     node --harmony src/scripts/make.js",
     "lint": "eslint . --ext .js --ext .jsx"
   },
@@ -47,6 +47,7 @@
     "eslint-plugin-react": "^3.2.2",
     "express": "^4.13.3",
     "h2o2": "^4.0.1",
+    "nodemon": "^1.8.1",
     "react-hot-loader": "^1.2.8",
     "react-transform-hmr": "^1.0.1",
     "style-loader": "^0.12.3",
