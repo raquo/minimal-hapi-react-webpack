@@ -78,7 +78,7 @@ If something's not working in my setup, please [file an issue](https://github.co
 
 ## Author
 
-Nikita Gazarov
+Nikita Gazarov + [Contributors](https://github.com/raquo/minimal-hapi-react-webpack/graphs/contributors)
 
 [nikita@raquo.com](mailto:nikita@raquo.com)
 
