@@ -5,12 +5,13 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Counter = require('./components/counter');
 
 require('./main-sandbox.css');
 
 function mainSandbox () {
-    React.render(
+    ReactDOM.render(
         React.createElement(Counter),
         document.getElementById('counterContainer')
     );
