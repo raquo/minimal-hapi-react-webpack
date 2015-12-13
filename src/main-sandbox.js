@@ -4,15 +4,16 @@ if (process.env.NODE_ENV !== 'development') {
     throw new Error('ERROR: Sandbox is only intended for dev environment');
 }
 
-var React = require('react');
+var React = require('react'); // React must be in scope when using JSX because JSX is translated into React.createElement(...)
+var ReactDOM = require('react-dom');
 var Counter = require('./components/counter');
 
 require('./main-sandbox.css');
 
 function mainSandbox () {
-    React.render(
-        React.createElement(Counter),
-        document.getElementById('counterContainer')
+    ReactDOM.render(
+        <Counter />,
+        document.getElementById('appContainer')
     );
 }
 

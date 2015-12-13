@@ -1,5 +1,10 @@
 'use strict';
 
+// Perform babel transforms defined in .babelrc (ES6, JSX, etc.) on server-side code
+// Note: the options in .babelrc are also used for client-side code
+// because we use a babel loader in webpack config
+require('babel-register');
+
 var config = require('./config/variables');
 var path = require('path');
 var Hapi = require('hapi');
@@ -112,20 +117,12 @@ server.register(plugins, (err) => {
             }
         });
 
-        // Proxy webpack HMR requests to webpack-dev-server
-        server.route({
-            method: 'GET',
-            path: '/__webpack_hmr', // this includes HMR patches, not just webpack bundle files
-            handler: {
-                proxy: {
-                    host: config.server.host,
-                    port: config.webpack.port,
-                    passThrough: true
-                }
-            }
-        });
+        // Note: We also make requests to Webpack Dev Server EventSource endpoint (typically /__webpack_hmr).
+        // We don't need to proxy these requests because we configured webpack-hot-middleware
+        // to request them directly from a webpack dev server URL in webpack-config.js
 
-        // Enable a separate sandbox
+        // Enable a separate sandbox.
+        // Use it to work on individual components outside of your application context.
         server.route({
             method: 'GET',
             path: '/sandbox',

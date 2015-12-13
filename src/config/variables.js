@@ -1,6 +1,5 @@
 'use strict';
 
-var deepExtend = require('deep-extend');
 var path = require('path');
 var chalk = require('chalk');
 
@@ -12,7 +11,24 @@ var WEB_ROOT_DIRNAME = 'public';
 var ASSETS_DIRNAME = 'static';
 var BUILD_DIRNAME = 'static/build';
 
+var SERVER_HOST;
+var SERVER_PORT;
+var SERVER_PROTOCOL = 'http'; // Note: I did not test https yet, so you might need more adjustments to make it work
+var WEBPACK_DEV_SERVER_PORT = 3001;
 
+if (process.env.NODE_ENV === 'development') {
+    SERVER_HOST = '0.0.0.0';
+    SERVER_PORT = 3000;
+
+} else if (process.env.NODE_ENV === 'production') {
+    SERVER_HOST = 'localhost';
+    SERVER_PORT = 2000;
+
+} else {
+    var errorText = '[' + path.basename(__filename) + '] ERROR: NODE_ENV is not set: ' + process.env.NODE_ENV;
+    console.log(chalk.red(errorText));
+    throw new Error(errorText);
+}
 
 var config = {
     publicPaths: {
@@ -33,9 +49,10 @@ var config = {
             'robots.txt',
             'favicon.ico'
         ],
-        // rootUrl is overridden at bottom of file using data
-        // in config.server (example format: http://example.com/)
-        rootUrl: null
+        host: SERVER_HOST,
+        port: SERVER_PORT,
+        protocol: SERVER_PROTOCOL,
+        rootUrl: SERVER_PROTOCOL + '://' + SERVER_HOST + ':' + SERVER_PORT
     },
     webpack: {
         // Webpack bundle filename
@@ -53,40 +70,11 @@ var config = {
 
 
 if (process.env.NODE_ENV === 'development') {
-    deepExtend(config, {
-        server: {
-            host: '0.0.0.0',
-            port: 3000,
-            protocol: 'http'
-        },
-        webpack: {
-            port: 3001
-        }
+    Object.assign(config.webpack, {
+        port: WEBPACK_DEV_SERVER_PORT,
+        devServerUrl: SERVER_PROTOCOL + '://' + SERVER_HOST + ':' + WEBPACK_DEV_SERVER_PORT
     });
-
-} else if (process.env.NODE_ENV === 'production') {
-    deepExtend(config, {
-        server: {
-            host: 'localhost',
-            port: 2000,
-            protocol: 'http'
-        }
-    });
-
-} else {
-    var errorText = '[' + path.basename(__filename) + '] ERROR: NODE_ENV is not set: ' + process.env.NODE_ENV;
-    console.log(chalk.red(errorText));
-    throw new Error(errorText);
 }
-
-
-config.server.rootUrl = [
-    config.server.protocol,
-    '://',
-    config.server.host,
-    ':',
-    config.server.port
-].join('');
 
 
 Object.freeze(config); // On a separate line because IntelliJ's JS code assistance is not very smart :(

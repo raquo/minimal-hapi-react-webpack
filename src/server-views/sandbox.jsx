@@ -19,7 +19,7 @@ var Sandbox = React.createClass({
                         fast, clean environment, without loading the rest of your application.
                     </p>
                     <p>{'UTC time from server: ' + Date.now()}</p>
-                    <p id='counterContainer'>This text will be replaced by Counter component</p>
+                    <div id='appContainer'>This text will be replaced by Counter component</div>
                 </body>
             </html>
         );

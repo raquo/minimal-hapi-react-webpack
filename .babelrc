@@ -1,19 +1,4 @@
 {
-    "stage": 1, // ES6 & JSX support. See docs: http://babeljs.io/docs/usage/experimental/
-    "env": {
-        "development": { // Only in dev! Make sure to set NODE_ENV properly.
-            "plugins": ["react-transform"], // https://github.com/gaearon/babel-plugin-react-transform
-            "extra": {
-                "react-transform": { // Configs for babel react-transform plugin
-                    "transforms": [
-                        {
-                            "transform": "react-transform-hmr", // Add hot module reloading support to react components
-                            "imports": ["react"],
-                            "locals": ["module"]
-                        }
-                    ]
-                }
-            }
-        }
-    }
+    // This Babel config file affects both frontend and server transpilation
+    "presets": ["es2015", "react", "stage-1"]
 }

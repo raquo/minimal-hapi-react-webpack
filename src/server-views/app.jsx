@@ -16,7 +16,7 @@ var App = React.createClass({
                 <body>
                     <p>Hello world, this layout is rendered by a <strong>server-side</strong> react view (views/app.jsx)</p>
                     <p>{'UTC time from server: ' + Date.now()}</p>
-                    <p id='counterContainer'>This text will be replaced by Counter component</p>
+                    <div id='appContainer'>This text will be replaced by Counter component</div>
                 </body>
             </html>
         );
