@@ -15,6 +15,7 @@ var BUILD_DIRNAME = 'static/build';
 var SERVER_HOST;
 var SERVER_PORT;
 var SERVER_PROTOCOL = 'http'; // Note: I did not test https yet, so you might need more adjustments to make it work
+var WEBPACK_DEV_SERVER_PORT = 3001;
 
 if (process.env.NODE_ENV === 'development') {
     SERVER_HOST = '0.0.0.0';
@@ -29,7 +30,6 @@ if (process.env.NODE_ENV === 'development') {
     console.log(chalk.red(errorText));
     throw new Error(errorText);
 }
-var WEBPACK_DEV_SERVER_PORT = 3001;
 
 var config = {
     publicPaths: {

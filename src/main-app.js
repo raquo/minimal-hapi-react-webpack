@@ -11,7 +11,7 @@ require('./main-app.css');
 function mainApp () {
     ReactDOM.render(
         React.createElement(Counter),
-        document.getElementById('counterContainer')
+        document.getElementById('appContainer')
     );
 }
 

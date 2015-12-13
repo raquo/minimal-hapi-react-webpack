@@ -13,7 +13,7 @@ require('./main-sandbox.css');
 function mainSandbox () {
     ReactDOM.render(
         React.createElement(Counter),
-        document.getElementById('counterContainer')
+        document.getElementById('appContainer')
     );
 }
 
