@@ -10,9 +10,9 @@ var config = require('./variables');
 
 
 var APP_ENTRY = path.join(config.paths.source, 'main-app');
-var WEBPACK_HOT_ENTRY = 'webpack-hot-middleware/client';
+var WEBPACK_HOT_ENTRY = 'webpack-hot-middleware/client?path=' + config.webpack.devServerUrl + '/__webpack_hmr';
 var JS_JSX = /\.(js|jsx)$/;
-var BABEL = 'babel?stage=1'; // Transpile ES6/JSX into ES5. For stages see: http://babeljs.io/docs/usage/experimental/
+var BABEL = 'babel'; // We use Babel to transpile ES6/JSX into ES5. See .babelrc for additional rules.
 
 
 
@@ -76,8 +76,19 @@ if (process.env.NODE_ENV === 'development') {
             loaders: [
                 {
                     test: JS_JSX,
-                    loaders: ['react-hot', BABEL], // Enable hot module replacement for react components (as opposed to full page reloads)
-                    include: config.paths.source
+                    loader: BABEL,
+                    include: config.paths.source,
+                    query: {
+                        plugins: [
+                            ['react-transform', {
+                                'transforms': [{
+                                    'transform': 'react-transform-hmr',
+                                    'imports': ['react'],
+                                    'locals': ['module']
+                                }]
+                            }]
+                        ]
+                    }
                 }
             ]
         },
