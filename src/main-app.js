@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react');
+var React = require('react'); // React must be in scope when using JSX because JSX is translated into React.createElement(...)
 var ReactDOM = require('react-dom');
 var Counter = require('./components/counter');
 
@@ -10,7 +10,7 @@ require('./main-app.css');
 
 function mainApp () {
     ReactDOM.render(
-        React.createElement(Counter),
+        <Counter />,
         document.getElementById('appContainer')
     );
 }

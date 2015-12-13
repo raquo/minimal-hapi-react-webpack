@@ -1,6 +1,5 @@
 'use strict';
 
-var deepExtend = require('deep-extend');
 var path = require('path');
 var chalk = require('chalk');
 
@@ -71,11 +70,9 @@ var config = {
 
 
 if (process.env.NODE_ENV === 'development') {
-    deepExtend(config, {
-        webpack: {
-            port: WEBPACK_DEV_SERVER_PORT,
-            devServerUrl: SERVER_PROTOCOL + '://' + SERVER_HOST + ':' + WEBPACK_DEV_SERVER_PORT
-        }
+    Object.assign(config.webpack, {
+        port: WEBPACK_DEV_SERVER_PORT,
+        devServerUrl: SERVER_PROTOCOL + '://' + SERVER_HOST + ':' + WEBPACK_DEV_SERVER_PORT
     });
 }
 

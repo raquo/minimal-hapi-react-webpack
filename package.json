@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "chalk": "^1.1.1",
-    "deep-extend": "^0.4.0",
     "hapi": "^11.1.2",
     "hapi-react-views": "^5.0.1",
     "inert": "^3.2.0",
@@ -57,7 +56,6 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.11.0",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.3.0",
-    "webpack-merge": "^0.3.1"
+    "webpack-hot-middleware": "^2.3.0"
   }
 }
