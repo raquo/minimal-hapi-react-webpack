@@ -4,23 +4,25 @@ This starter kit connects a hapi.js server with webpack dev server with react ho
 
 Very basic production config is also in place.
 
-You can use this starter kit to efficiently develop react components and applications that might or might not talk to a Hapi.js backend.
+You can use this starter kit to efficiently develop react components and applications that might talk to a Hapi.js backend.
+
+The primary purpose of this repo however is to demonstrate how to wire together these technologies. The config files are organized to have an obvious single source of truth. I've added plenty of comments to explain which config does what.
 
 ## Features
 
-* React (client) hot module reloading is configured with babel-plugin-react-transform
+* React (client) hot module reloading is configured with react-transform-hmr
 * ESLint error & warnings are logged to browser console
 * Application server (Hapi.js) is separate from webpack dev server (Express.js)
-* Hapi.js proxies webpack requests to webpack dev server
-* Hapi.js is configured to server static files, and a couple example routes
+* Hapi.js proxies requests for webpack assets to webpack dev server
+* Hapi.js is configured to serve static files, and a couple example routes
 * A separate sandbox entry point is set up for white room component development
 * Sample client-side React view with a counter to easily test hot module reloading (any time the page does a full reload, the counter resets).
 * Server-side React views instead of index.html (see /server-views). Isomorphism is easy to configure if needed using the same dependency.
 * Automatic application server reloading using nodemon
-* Babel transpilation of ES6 into browser-compatible ES5. Use all the fancy stuff today!
+* Babel transpilation of ES6 and JSX into browser-compatible ES5, both for server and client code. Use all the fancy stuff today!
 * Webpack assets are generated with content hashes in filenames for easy cache busting
-* Webpack assets are optimized with Uglify.js on production, removing dead code (TODO: and server-only code)
-* Webpack asset URLs are saved into a file, and a helper method is provided to extract them for usage in HTML files.
+* Webpack assets are optimized with Uglify.js on production, removing dead code (TODO: add server-only code)
+* Webpack asset URLs are recorded in a file, and a helper method is provided to extract them for usage in HTML / JSX.
 
 ## Configuration
 
@@ -35,6 +37,7 @@ You can use this starter kit to efficiently develop react components and applica
 * You need node.js v4+ installed globally on your machine. If using OS X, best to install node using [Homebrew](http://brew.sh/). Node v0.12 might work too, but I don't test it anymore.
 * npm `devDependencies` are required to develop on and build the project.
 * npm `dependencies` are the only ones that are required to run the app in production once it has been built.
+* Core dependencies: Hapi, Webpack, Babel 6, React, react-transform-hmr.
 
 
 ### Development
@@ -61,6 +64,8 @@ You can use this starter kit to efficiently develop react components and applica
 * Hot module reloading only works for react components and CSS files.
 * If you change files that cause nodemon to reload, HMR will temporarily break and you'll need to reload the page manually (or make another change to another file that is covered by HMR but does not trigger a server reload).
 * If you edit webpack-config.js or change the contents of node_modules (e.g. by installing a new dependency), you'll need to restart webpack dev server.
+* (TODO) Reloading while webpack is compiling loads a broken page. Ideally it should wait for webpack to finish compiling, and only then load the page.
+* (TODO) I didn't test webpack dev server https support. Might need a couple tweaks.
 
 ## Resources
 
