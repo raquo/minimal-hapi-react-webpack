@@ -18,11 +18,11 @@ var WEBPACK_DEV_SERVER_PORT = 3001;
 
 if (process.env.NODE_ENV === 'development') {
     SERVER_HOST = '0.0.0.0';
-    SERVER_PORT = 3000;
+    SERVER_PORT = process.env.PORT || 3000;
 
 } else if (process.env.NODE_ENV === 'production') {
-    SERVER_HOST = 'localhost';
-    SERVER_PORT = 2000;
+    SERVER_HOST = '0.0.0.0';
+    SERVER_PORT = process.env.PORT || 2000;
 
 } else {
     var errorText = '[' + path.basename(__filename) + '] ERROR: NODE_ENV is not set: ' + process.env.NODE_ENV;
