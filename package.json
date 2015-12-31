@@ -17,25 +17,19 @@
     "url": "https://github.com/raquo/minimal-hapi-react-webpack"
   },
   "main": "src/server.js",
+  "engines": {
+    "node": "^4.2.2"
+  },
   "scripts": {
     "start": "NODE_ENV=production     node --harmony src/server.js",
     "build": "NODE_ENV=production     node --harmony src/scripts/make.js  &&  NODE_ENV=production   webpack -p --config src/config/webpack-config.js",
     "webpack": "NODE_ENV=development  node --harmony src/scripts/make.js  &&  NODE_ENV=development  node --harmony src/webpack-dev-server.js",
     "dev": "NODE_ENV=development      node --harmony src/scripts/make.js  &&  NODE_ENV=development  ./node_modules/nodemon/bin/nodemon.js --harmony src/server.js",
     "make": "NODE_ENV=development     node --harmony src/scripts/make.js",
-    "lint": "eslint . --ext .js --ext .jsx"
+    "lint": "eslint . --ext .js --ext .jsx",
+    "postinstall": "npm run build"
   },
   "dependencies": {
-    "chalk": "^1.1.1",
-    "hapi": "^11.1.2",
-    "hapi-react-views": "^5.0.1",
-    "inert": "^3.2.0",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
-    "rimraf": "^2.4.4",
-    "vision": "^4.0.1"
-  },
-  "devDependencies": {
     "assets-webpack-plugin": "^3.2.0",
     "babel-core": "^6.3.17",
     "babel-eslint": "^4.1.6",
@@ -45,17 +39,27 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
     "babel-register": "^6.3.13",
+    "chalk": "^1.1.1",
     "css-loader": "^0.23.0",
+    "hapi": "^11.1.2",
+    "hapi-react-views": "^5.0.1",
+    "inert": "^3.2.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "rimraf": "^2.4.4",
+    "style-loader": "^0.13.0",
+    "vision": "^4.0.1",
+    "webpack": "^1.11.0",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.3.0"
+  },
+  "devDependencies": {
     "eslint": "^1.1.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.2.2",
     "express": "^4.13.3",
     "h2o2": "^4.0.1",
     "nodemon": "^1.8.1",
-    "react-transform-hmr": "^1.0.1",
-    "style-loader": "^0.13.0",
-    "webpack": "^1.11.0",
-    "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.3.0"
+    "react-transform-hmr": "^1.0.1"
   }
 }
