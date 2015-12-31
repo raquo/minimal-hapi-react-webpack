@@ -16,6 +16,8 @@ var SERVER_PORT;
 var SERVER_PROTOCOL = 'http'; // Note: I did not test https yet, so you might need more adjustments to make it work
 var WEBPACK_DEV_SERVER_PORT = 3001;
 
+// process.env object contains environment variables passed to the node.js process.
+// For example, you can see NODE_ENV passed to node in the "scripts" section of package.json
 if (process.env.NODE_ENV === 'development') {
     SERVER_HOST = '0.0.0.0';
     SERVER_PORT = process.env.PORT || 3000;

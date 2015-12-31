@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.2.0",
-    "css-loader": "^0.23.0",
     "babel-core": "^6.3.17",
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.0",
@@ -41,6 +40,7 @@
     "babel-preset-stage-1": "^6.3.13",
     "babel-register": "^6.3.13",
     "chalk": "^1.1.1",
+    "css-loader": "^0.23.0",
     "hapi": "^11.1.2",
     "hapi-react-views": "^5.0.1",
     "inert": "^3.2.0",

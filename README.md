@@ -35,8 +35,8 @@ The primary purpose of this repo however is to demonstrate how to wire together 
 ### Dependencies
 
 * You need node.js v4+ installed globally on your machine. If using OS X, best to install node using [Homebrew](http://brew.sh/). Node v0.12 might work too, but I don't test it anymore.
-* npm `devDependencies` are required to develop on and build the project.
-* npm `dependencies` are the only ones that are required to run the app in production once it has been built.
+* npm `dependencies` are required to build and run the app in production.
+* npm `devDependencies` are additionally required to build and run the app in development.
 * Core dependencies: Hapi, Webpack, Babel 6, React, react-transform-hmr.
 
 
