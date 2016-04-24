@@ -5,7 +5,7 @@ var jsdom = require('jsdom').jsdom;
 /**
  * @param {string} [markup] - custom HTML layout into which you'll be rendering your test components
  */
-module.exports = markup => {
+module.exports = (markup) => {
     // Idempotence: multiple calls to this function should not reset global objects
     if (typeof document !== 'undefined') {
         return;

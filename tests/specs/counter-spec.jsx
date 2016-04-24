@@ -1,45 +1,45 @@
 'use strict';
 
 // In order for React to use our test DOM we need to require it before requiring React
-require('./test-dom')();
+require('../utils/test-dom')();
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 var expect = require('chai').expect;
-var then = require('./then');
 
-var Counter = require('../src/components/counter');
+var Counter = require('../../src/components/counter');
 
 
 describe('Counter component.', () => {
 
     var TestUtils = require('react-addons-test-utils');
     var Simulate = TestUtils.Simulate;
-    
+
     var component;
     var renderedDOMElement;
-    var interval = 100;
+    var interval = 20;
 
 
     before(() => {
-        component = TestUtils.renderIntoDocument(<Counter interval={ interval } />);
+        component = TestUtils.renderIntoDocument(<Counter interval={interval} />);
         renderedDOMElement = ReactDOM.findDOMNode(component);
     });
 
 
-    // Done callback indicates that this test block finished, required for asynchronous testing
+    // `done` callback allows the test to wait for asynchronous code to complete
     it('renders counter value', (done) => {
-        let counterValue = component.state.counter;
-        let renderedDOMNumber = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+        var counterValue = component.state.counter;
+        var renderedDOMNumber = parseInt(renderedDOMElement.querySelector('.-number').textContent);
 
         expect(renderedDOMNumber).to.equal(counterValue);
 
-        // Function parsed as first parameter will be called in 1 second (the second parameter)
-        then(
+        setTimeout(
             () => {
-                counterValue = component.state.counter.toString();
-                renderedDOMNumber = renderedDOMElement.querySelector('.-number').textContent;
+                var nextCounterValue = component.state.counter;
+                renderedDOMNumber = parseInt(renderedDOMElement.querySelector('.-number').textContent);
 
-                expect(renderedDOMNumber).to.equal(counterValue);
+                expect(nextCounterValue).to.equal(counterValue + 1);
+                expect(renderedDOMNumber).to.equal(nextCounterValue);
 
                 done();
             },
@@ -48,30 +48,26 @@ describe('Counter component.', () => {
     });
 
 
-    it('increments/decrements counter when +/- button clicked', (done) => {
-        let currentCounterValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
-        let incrementButton = renderedDOMElement.querySelectorAll('.-button')[0];
+    it('increments counter when `+` button clicked', () => {
+        var currentCounterValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+        var incrementButton = renderedDOMElement.querySelectorAll('.-button')[0];
 
         Simulate.click(incrementButton);
 
-        // The DOM counter value will be changed on next React setState tick
-        // so we use then function to check our expectation after it happens
-        then(() => {
-            let incrementedValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+        var incrementedValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
 
-            expect(incrementedValue).to.equal(currentCounterValue + 1);
+        expect(incrementedValue).to.equal(currentCounterValue + 1);
+    });
 
-            currentCounterValue = incrementedValue;
-            let decrementButton = renderedDOMElement.querySelectorAll('.-button')[1];
 
-            Simulate.click(decrementButton);
-        })
-        .then(() => {
-            let decrementedValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+    it('decrements counter when `-` button clicked', () => {
+        var currentCounterValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+        var decrementButton = renderedDOMElement.querySelectorAll('.-button')[1];
 
-            expect(decrementedValue).to.equal(currentCounterValue - 1);
+        Simulate.click(decrementButton);
 
-            done();
-        });
+        var decrementedValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+
+        expect(decrementedValue).to.equal(currentCounterValue - 1);
     });
 });
