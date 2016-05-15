@@ -23,6 +23,7 @@ The primary purpose of this repo however is to demonstrate how to wire together 
 * Webpack assets are generated with content hashes in filenames for easy cache busting
 * Webpack assets are optimized with Uglify.js on production, removing dead code (TODO: add server-only code)
 * Webpack asset URLs are recorded in a file, and a helper method is provided to extract them for usage in HTML / JSX.
+* Basic testing setup with Mocha, Chai and jsdom
 
 ## Configuration
 

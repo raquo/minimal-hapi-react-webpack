@@ -27,7 +27,8 @@
     "dev": "NODE_ENV=development      node --harmony src/scripts/make.js  &&  NODE_ENV=development  ./node_modules/nodemon/bin/nodemon.js --harmony src/server.js",
     "make": "NODE_ENV=development     node --harmony src/scripts/make.js",
     "lint": "eslint . --ext .js --ext .jsx",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "test": "./node_modules/.bin/mocha --compilers jsx:babel-register --require ignore-styles ./tests/specs --recursive"
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.2.0",
@@ -39,12 +40,17 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
     "babel-register": "^6.3.13",
+    "chai": "^3.5.0",
     "chalk": "^1.1.1",
     "css-loader": "^0.23.0",
     "hapi": "^11.1.2",
     "hapi-react-views": "^5.0.1",
+    "ignore-styles": "^1.2.0",
     "inert": "^3.2.0",
+    "jsdom": "^8.1.0",
+    "mocha": "^2.4.5",
     "react": "^0.14.3",
+    "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.3",
     "rimraf": "^2.4.4",
     "style-loader": "^0.13.0",

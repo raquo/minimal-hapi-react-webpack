@@ -19,7 +19,7 @@ class Counter extends React.Component {
         this.increment = this.increment.bind(this);
         this.remove = this.remove.bind(this);
 
-        setInterval(this.increment.bind(this), 1000);
+        setInterval(this.increment.bind(this), this.props.interval);
     }
 
     render () {
@@ -48,6 +48,15 @@ class Counter extends React.Component {
         super.setState({counter: this.state.counter - 1});
     }
 }
+
+
+Counter.defaultProps = {
+    interval: 1000
+};
+
+Counter.propTypes = {
+    interval: React.PropTypes.number.isRequired
+};
 
 
 module.exports = Counter;
