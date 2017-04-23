@@ -74,7 +74,7 @@ The primary purpose of this repo however is to demonstrate how to wire together 
 
 Follow [Dan Abramov](https://medium.com/@dan_abramov/) and check out his projects, he knows a thing or two about react and hot module reloading.
 
-This project uses a bit of ES6 syntax. If you're not into that yet, check out [Understanding ES6](https://leanpub.com/understandinges6/read).
+This project uses ES6 language features. If you're not into that yet, check out [Understanding ES6](https://leanpub.com/understandinges6/read).
 
 If something's not working in my setup, please [file an issue](https://github.com/raquo/minimal-hapi-react-webpack/issues) on Github.
 
