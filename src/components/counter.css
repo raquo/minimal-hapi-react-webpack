@@ -1,28 +1,34 @@
+/*
+ * Plain CSS is cumbersome.
+ * You typically want to use a CSS preprocessor like http://lesscss.org/
+ * Adding one is very easy, just one more dependency and only a few more lines in webpack config.
+ */
+
 .Counter {
-    max-width: 400px;
-    /*background: #ffcccc;*/
+  max-width: 400px;
+  /*background: #ffcccc;*/
 }
 
 .Counter .-number {
-    display: inline-block;
-    min-width: 1.5em;
-    font-size: 80px;
-    color: #0040b0;
+  display: inline-block;
+  min-width: 1.5em;
+  font-size: 80px;
+  color: #0040b0;
 }
 
 .Counter .-button {
-    position: relative;
-    top: -12px;
-    margin-left: 30px;
-    font-size: 40px;
-    background: white;
-    border: 3px solid #0040b0;
-    border-radius: 10px;
-    width: 2em;
-    cursor: pointer;
-    line-height: 1.7em;
+  position: relative;
+  top: -12px;
+  margin-left: 30px;
+  font-size: 40px;
+  background: white;
+  border: 3px solid #0040b0;
+  border-radius: 10px;
+  width: 2em;
+  cursor: pointer;
+  line-height: 1.7em;
 }
 
 .Counter .-button:active {
-    background: #66aaff;
+  background: #66aaff;
 }

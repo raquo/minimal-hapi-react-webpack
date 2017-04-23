@@ -1,5 +1,3 @@
-'use strict';
-
 require('./clean');
 
 require('./make-eslintignore')();

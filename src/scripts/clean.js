@@ -1,8 +1,6 @@
-'use strict';
-
-var path = require('path');
-var FileWriter = require('../tools/file-writer');
-var config = require('../config/variables');
+const path = require('path');
+const FileWriter = require('../tools/file-writer');
+const config = require('../config/variables');
 
 FileWriter.remove('.eslintignore');
 FileWriter.remove('nodemon.json');

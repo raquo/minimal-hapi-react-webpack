@@ -1,73 +1,70 @@
-'use strict';
-
-// In order for React to use our test DOM we need to require it before requiring React
-require('../utils/test-dom')();
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var expect = require('chai').expect;
-
-var Counter = require('../../src/components/counter');
-
+/* eslint global-require: ["off"] */
 
 describe('Counter component.', () => {
+  // In order for React to use our test DOM we need to require it before requiring React
+  require('../utils/test-dom')();
 
-    var TestUtils = require('react-addons-test-utils');
-    var Simulate = TestUtils.Simulate;
+  const React = require('react');
+  const ReactDOM = require('react-dom');
+  const TestUtils = require('react-dom/test-utils');
+  const expect = require('chai').expect;
 
-    var component;
-    var renderedDOMElement;
-    var interval = 20;
+  const Counter = require('../../src/components/counter');
 
+  let component;
+  let renderedDOMElement;
+  const interval = 10;
 
-    before(() => {
-        component = TestUtils.renderIntoDocument(<Counter interval={interval} />);
-        renderedDOMElement = ReactDOM.findDOMNode(component);
-    });
+  const parseIntFromNode = node => parseInt(node.textContent, 10);
 
-
-    // `done` callback allows the test to wait for asynchronous code to complete
-    it('renders counter value', (done) => {
-        var counterValue = component.state.counter;
-        var renderedDOMNumber = parseInt(renderedDOMElement.querySelector('.-number').textContent);
-
-        expect(renderedDOMNumber).to.equal(counterValue);
-
-        setTimeout(
-            () => {
-                var nextCounterValue = component.state.counter;
-                renderedDOMNumber = parseInt(renderedDOMElement.querySelector('.-number').textContent);
-
-                expect(nextCounterValue).to.equal(counterValue + 1);
-                expect(renderedDOMNumber).to.equal(nextCounterValue);
-
-                done();
-            },
-            interval
-        );
-    });
+  before(() => {
+    component = TestUtils.renderIntoDocument(<Counter interval={interval} />);
+    renderedDOMElement = ReactDOM.findDOMNode(component); // eslint-disable-line react/no-find-dom-node
+  });
 
 
-    it('increments counter when `+` button clicked', () => {
-        var currentCounterValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
-        var incrementButton = renderedDOMElement.querySelectorAll('.-button')[0];
+  // `done` callback allows the test to wait for asynchronous code to complete
+  it('renders counter value', (done) => {
+    const counterValue = component.state.counter;
+    let renderedDOMNumber = parseIntFromNode(renderedDOMElement.querySelector('.-number'));
 
-        Simulate.click(incrementButton);
+    expect(renderedDOMNumber).to.equal(counterValue);
 
-        var incrementedValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+    setTimeout(
+      () => {
+        const nextCounterValue = component.state.counter;
+        renderedDOMNumber = parseIntFromNode(renderedDOMElement.querySelector('.-number'));
 
-        expect(incrementedValue).to.equal(currentCounterValue + 1);
-    });
+        expect(nextCounterValue).to.equal(counterValue + 1);
+        expect(renderedDOMNumber).to.equal(nextCounterValue);
+
+        done();
+      },
+      interval,
+    );
+  });
 
 
-    it('decrements counter when `-` button clicked', () => {
-        var currentCounterValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
-        var decrementButton = renderedDOMElement.querySelectorAll('.-button')[1];
+  it('increments counter when `+` button clicked', () => {
+    const currentCounterValue = parseIntFromNode(renderedDOMElement.querySelector('.-number'));
+    const incrementButton = renderedDOMElement.querySelectorAll('.-button')[0];
 
-        Simulate.click(decrementButton);
+    TestUtils.Simulate.click(incrementButton);
 
-        var decrementedValue = parseInt(renderedDOMElement.querySelector('.-number').textContent);
+    const incrementedValue = parseIntFromNode(renderedDOMElement.querySelector('.-number'));
 
-        expect(decrementedValue).to.equal(currentCounterValue - 1);
-    });
+    expect(incrementedValue).to.equal(currentCounterValue + 1);
+  });
+
+
+  it('decrements counter when `-` button clicked', () => {
+    const currentCounterValue = parseIntFromNode(renderedDOMElement.querySelector('.-number'));
+    const decrementButton = renderedDOMElement.querySelectorAll('.-button')[1];
+
+    TestUtils.Simulate.click(decrementButton);
+
+    const decrementedValue = parseIntFromNode(renderedDOMElement.querySelector('.-number'));
+
+    expect(decrementedValue).to.equal(currentCounterValue - 1);
+  });
 });
