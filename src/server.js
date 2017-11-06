@@ -15,10 +15,12 @@ const HapiReactViews = require('hapi-react-views');
 
 const server = new Hapi.Server();
 
-server.connection({
+const connectionConfig = {
   host: config.server.host,
   port: config.server.port
-});
+};
+
+server.connection(connectionConfig);
 
 
 const plugins = [
@@ -128,6 +130,6 @@ server.register(plugins, (err) => {
   }
 
   server.start(() => {
-    console.log('Hapi server started!');
+    console.log(`Hapi server started! Listening at ${connectionConfig.host}:${connectionConfig.port}`);
   });
 });
